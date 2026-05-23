@@ -10,7 +10,7 @@ export const INITIAL_HORSES: Horse[] = [
   { id: 'roasso', name: 'ロアッソ', breed: '半血種', gender: '騙馬', birthYear: 2009, coatColor: 'ベイ' },
   { id: 'dark', name: 'ダーク', breed: 'アパルーサ', gender: '騙馬', birthYear: 2005, coatColor: '栃栗' },
   { id: 'mirai', name: 'ミライ', breed: '温血馬', gender: '騙馬', birthYear: 1999, coatColor: '芦' },
-  { id: 'haya', name: '刃（はや）', breed: 'KWPN', gender: '騙馬', birthYear: 2022, note: 'ジュジュの子' },
+  { id: 'haya', name: '刃（じん）', breed: 'KWPN', gender: '騙馬', birthYear: 2022, note: 'ジュジュの子' },
   { id: 'shun', name: '駿（しゅん）', breed: 'クォーターホース', gender: '騙馬', coatColor: '茶', note: 'ララの子' },
   { id: 'masagoro', name: 'マサゴロウ', breed: '日本乗系種', gender: '騙馬', birthYear: 2008, coatColor: '鹿', note: '流鏑馬訓練中' },
   { id: 'gutaus', name: 'グートアウス', breed: 'サラブレッド', gender: '騙馬', note: '流鏑馬訓練中' },

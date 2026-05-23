@@ -15,7 +15,7 @@ import {
 } from '../lib/firestoreDB'
 import { ensureAuth } from '../lib/firebase'
 
-const CURRENT_DATA_VERSION = 2
+const CURRENT_DATA_VERSION = 3
 
 interface AppContextValue {
   horses: Horse[]
@@ -76,6 +76,12 @@ function migrate(raw: Partial<AppSettings>): AppSettings {
       instructors = [...instructors, { id: 'tsujii', name: '辻井', isRegular: true }]
     }
     v = 2
+  }
+
+  if (v < 3) {
+    // 刃（はや）→ 刃（じん）に改名
+    horses = horses.map(h => h.id === 'haya' ? { ...h, name: '刃（じん）' } : h)
+    v = 3
   }
 
   return { dataVersion: v, horses, instructors, activityTypes, thresholds }
