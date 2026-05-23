@@ -20,7 +20,7 @@ enableIndexedDbPersistence(db).catch(() => {
   // 複数タブ open 時は silent fail
 })
 
-/** アプリ起動時に匿名認証（Firestoreアクセス権限のため） */
+/** アプリ起動時に匿名認証（Firestoreアクセス権限のため）- v2 */
 export async function ensureAuth() {
   if (!auth.currentUser) {
     await signInAnonymously(auth)
