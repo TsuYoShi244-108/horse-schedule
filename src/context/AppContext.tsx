@@ -151,15 +151,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
     addActivity: async (a) => {
       setActivities(prev => [...prev, a])
-      await addActivityDoc(a)
+      await addActivityDoc(a).catch(err => console.error('[Firestore] addActivity failed:', err))
     },
     updateActivity: async (a) => {
       setActivities(prev => prev.map(x => x.id === a.id ? a : x))
-      await updateActivityDoc(a)
+      await updateActivityDoc(a).catch(err => console.error('[Firestore] updateActivity failed:', err))
     },
     deleteActivity: async (id) => {
       setActivities(prev => prev.filter(x => x.id !== id))
-      await deleteActivityDoc(id)
+      await deleteActivityDoc(id).catch(err => console.error('[Firestore] deleteActivity failed:', err))
     },
 
     addHorse: async (h) => patchSettings({ horses: [...settings.horses, h] }),

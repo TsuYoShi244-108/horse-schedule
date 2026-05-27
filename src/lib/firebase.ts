@@ -1,5 +1,9 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore'
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+} from 'firebase/firestore'
 import { getAuth, signInAnonymously } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -12,15 +16,17 @@ const firebaseConfig = {
 }
 
 export const app = initializeApp(firebaseConfig)
-export const db = getFirestore(app)
-export const auth = getAuth(app)
 
-// オフラインでも使えるようにIndexedDBキャッシュを有効化
-enableIndexedDbPersistence(db).catch(() => {
-  // 複数タブ open 時は silent fail
+// 複数タブ対応の永続キャッシュ（旧 enableIndexedDbPersistence の置き換え）
+export const db = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentMultipleTabManager(),
+  }),
 })
 
-/** アプリ起動時に匿名認証（Firestoreアクセス権限のため）- v2 */
+export const auth = getAuth(app)
+
+/** アプリ起動時に匿名認証（Firestoreアクセス権限のため） */
 export async function ensureAuth() {
   if (!auth.currentUser) {
     await signInAnonymously(auth)

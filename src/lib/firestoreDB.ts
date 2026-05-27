@@ -64,10 +64,16 @@ export function subscribeActivities(
   onChange: (activities: Activity[]) => void
 ): Unsubscribe {
   const q = query(ACTIVITIES_COL)
-  return onSnapshot(q, snap => {
-    const activities = snap.docs.map(d => d.data() as Activity)
-    onChange(activities)
-  })
+  return onSnapshot(
+    q,
+    snap => {
+      const activities = snap.docs.map(d => d.data() as Activity)
+      onChange(activities)
+    },
+    err => {
+      console.error('[Firestore] subscribeActivities error:', err)
+    }
+  )
 }
 
 // ── Auth ────────────────────────────────────────────
